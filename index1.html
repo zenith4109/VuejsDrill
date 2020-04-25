@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Vue Component Registration</title>
+  </head>
+  <body>
+    <!--
+    1. Vue 라이브러리 파일로딩
+    2. Vue 생성자로 컴포넌트 등록(Vue.component())
+    3. 인스턴스 객체 생성(옵션 속성 포함)
+    4. 특정 화면 요소에 인스턴스 mount
+    5. 인스턴스 내용 변환 : <my-component> 가 <div> 로 변환됨.
+    6. 변환된 화면요소를 사용자가 최종확인.
+    -->
+    <div id="app">
+      <h3>첫번째 인스턴스 영역</h3>
+      <my-global-component></my-global-component> <!-- 전역컴포넌트 등록 -->
+      <my-local-component></my-local-component>   <!-- 지역컴포넌트 등록 -->
+    </div>
+    <hr>
+    <div id="app2">
+      <h3>두번째 인스턴스 영역</h3>
+      <my-global-component></my-global-component> <!-- 전역컴포넌트 등록 -->
+      <my-local-component></my-local-component>   <!-- 지역컴포넌트 등록 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script>
+      <!-- 전역컴포넌트 생성 -->
+      Vue.component('my-global-component',{                  <!--컴포넌트 이름-->
+        template: '<div>전역 컴포넌트가 등록되었습니다!</div>'  <!--컴포넌트 내용-->
+      });
+
+      <!-- 지역컴포넌트 생성 - 첫번째 인스턴스 -->
+      var cmp = {
+        template: '<div>지역 컴포넌트가 등록되었습니다.</div>'
+      }
+      new Vue({
+        el: '#app',
+        components: {
+          'my-local-component': cmp
+        }
+      });
+
+      <!-- 지역컴포넌트 생성 - 두번째 인스턴스 -->
+      new Vue({
+        el: "#app2"
+      });
+
+    </script>
+  </body>
+</html>
