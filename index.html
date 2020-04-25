@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Sample</title>
+  </head>
+  <body>
+    <div id="app">
+        {{ message }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+              message: 'Hello Vue.js!'
+          },
+          beforeCreate: function() {       <!-- 1. 인스턴스 생성시, 가장 처음으로 실행. data속성, methods속성이 인스턴스에 정의되지않고, DOM화면요소에 접근불가 -->
+            console.log("beforeCreate");
+          },
+          created: function() {            <!-- 2. data속성, methods속성이 정의되어, this.data 또는 this.fetchData()등을 속성에 정의된 값에 접근가능. 인스턴스 부착전으로 template속성에 정의된 DOM 요소로의 접근은 불가 -->
+            console.log("created");        <!-- 2. 또한, data속성과 methods 속성에 접근가능한 첫 Lifecycle 이자, 컴포넌트가 생성되고 나서 실행되는 단계라 서버에 데이터를 요청하여 받아오는 로직을 수행함. -->
+          },
+          beforeMount: function() {        <!-- 3. template속성에 지정한 마크업속성을 render()함수로 변환한 후, el-->
+            console.log("beforeMount");
+          },
+          mounted:function() {
+            console.log("mounted");
+            this.message = "Hello Vue!";
+          },
+          beforeUpdate:function() {
+            console.log("beforeUpdate");
+          },
+          updated: function() {                   <!-- data 변경시 호출 수행됨 -->
+            console.log("updated");
+          },
+          beforeDestroy: function() {
+            console.log("beforeDestroy");
+          },
+          destroyed: function() {
+            console.log("destroyed");
+          }
+        });
+    </script>
+  </body>
+</html>
